@@ -1,0 +1,27 @@
+#
+    import java.util.function.Function;
+    import static java.util.function.Function.identity;
+#
+
+#
+    private int combinations(int n, int k) {
+        if (k==0) return 1;
+        if (n==0) return 0;
+        return combinations(n-1,k-1)+combinations(n-1,k);
+    }
+#
+F : 'Integer' = <\\d+> # return Integer.parseInt(arg); #;
+
+e : 'Integer' = t ep # return arg2.apply(arg1); #;
+
+ep : 'Function<Integer, Integer>' = '+' t ep # return x -> arg2.apply(x + arg1); #;
+ep = # return identity(); #;
+
+t : 'Integer' = f tp # return arg2.apply(arg1); #;
+
+tp : 'Function<Integer, Integer>' = '*' f tp # return x -> arg2.apply(x * arg1); #;
+tp = # return identity(); #;
+
+f : 'Integer' = '(' e ')' # return arg1; #;
+f : 'Integer' = 'C' '(' e ',' e ')' # return combinations(arg1, arg2); #;
+f = F # return term1; #;

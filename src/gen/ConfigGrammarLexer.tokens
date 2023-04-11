@@ -1,0 +1,16 @@
+REG=1
+NAME=2
+ID=3
+TERM=4
+CODE=5
+EQ=6
+COL=7
+DASH=8
+END=9
+NEWLINE=10
+WS=11
+COMMENT=12
+'='=6
+':'=7
+'<-'=8
+';'=9

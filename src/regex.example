@@ -1,0 +1,2 @@
+F : Integer = <\\d+> \< return Integer.parseInt(arg);\>;
+s : 'Integer' = F \<  return arg1 \>

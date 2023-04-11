@@ -1,0 +1,23 @@
+#
+    import java.util.function.Function;
+    import static java.util.function.Function.identity;
+#
+
+F : 'Integer' = <\\d+> # return Integer.parseInt(arg); #;
+
+e : 'Integer' = t ep <- # arg1 #
+    # return arg2; #;
+
+ep : 'Integer' <- 'Integer' = '+' t ep <- # arg1 #
+    # return arg2; #;
+ep = # return inh; #;
+
+t : 'Integer' = f tp <- # arg1 #
+    # return arg2; #;
+
+tp : 'Integer' <- 'Integer' = '*' f tp <- # arg1 #
+    # return arg2; #;
+tp = # return 0; #;
+
+f : 'Integer' = '(' e ')' # return arg1; #;
+f = F # return term1; #;

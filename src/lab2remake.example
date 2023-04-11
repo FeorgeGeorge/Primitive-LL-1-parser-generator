@@ -1,0 +1,22 @@
+# #
+
+F : 'Tree' = <[a-zA-z]> # return new Tree(arg); #;
+
+s : 'Tree' = e # return arg1; #;
+e : 'Tree' = d ep # return new Tree("e", List.of(arg1, arg2)); #;
+
+ep : 'Tree' = '|' d ep # return new Tree("ep", List.of(new Tree("|"), arg1, arg2)); #;
+ep = # return new Tree("ep"); #;
+
+d : 'Tree' = t dp #return new Tree("d", List.of(arg1, arg2)); #;
+
+dp : 'Tree' = '^' t dp # return new Tree("d", List.of(new Tree("^"), arg1, arg2)); #;
+dp = # return new Tree("ep"); #;
+
+t : 'Tree' = f tp # return new Tree("t", List.of(arg1, arg2)); #;
+tp : 'Tree' = '&' f tp # return new Tree("tp", List.of(new Tree("&"), arg1, arg2)); #;
+tp = # return new Tree("tp"); #;
+
+f : 'Tree' = '!'f # return new Tree("f", List.of(new Tree("!"), arg1)); #;
+f  = '(' e ')' # return new Tree("f", List.of(new Tree("("), arg1, new Tree(")")));#;
+f = F # return new Tree("f", List.of(term1)); #;
